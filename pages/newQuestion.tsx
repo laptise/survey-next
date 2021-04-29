@@ -1,3 +1,5 @@
+import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
@@ -11,6 +13,7 @@ export default function NewQuestion() {
     const newQuestion = new Question("");
     setQuestionList([...questionList, newQuestion]);
   }
+
   return (
     <Layout title="새로 만들기 | Survey-next">
       <h1>새 질문 만들기</h1>
@@ -18,8 +21,23 @@ export default function NewQuestion() {
         <QuestionBlock question={question} index={index} key={index} />
       ))}
       <div id="add-new-question">
-        <button onClick={addNewQuestion}>クリックして質問追加+</button>
+        <button onClick={addNewQuestion}>
+          <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
+        </button>
       </div>
+      <button
+        onClick={() => {
+          fetch("/api/users/test", {
+            headers: {
+              dasd: "asd",
+            },
+          })
+            .then((res) => res.json())
+            .then(console.log);
+        }}
+      >
+        ?dd
+      </button>
     </Layout>
   );
 }
@@ -67,7 +85,8 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
       {editingState ? (
         <>
           <button className="confirm-button" onClick={submit}>
-            質問を登録
+            <FontAwesomeIcon icon={faSave} />
+            저장
           </button>
           <div className="question-title-div">
             {index + 1}.
@@ -104,7 +123,7 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
       ) : (
         <>
           <button className="edit-button" onClick={editButtonEvent}>
-            編集
+            <FontAwesomeIcon icon={faPen} />
           </button>
           <span className="title">
             {index + 1}. {question.title}
