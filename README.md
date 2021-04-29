@@ -17,7 +17,7 @@
 
 순수 React였던 survey-proto 리포지토리 소스를 next.js화 시킨 후 hard push - 21/4/30
 
-##### 의존라이브러리 설치 (yarn이 설치 되어있어야함)
+### 의존라이브러리 설치 (yarn이 설치 되어있어야함)
 
 `yarn`
 
