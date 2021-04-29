@@ -1,0 +1,118 @@
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  left: 0;
+  box-shadow: 0 0 3px black;
+  nav {
+    padding: 10px;
+    a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+    }
+  }
+}
+body {
+  background: linear-gradient(335deg, rgba(34, 162, 195, 1) 0%, rgba(190, 229, 247, 1) 100%) fixed;
+}
+
+#app {
+  display: grid;
+  grid-template:
+    "header"
+    "body"
+    "footer";
+  grid-template-columns: 100%;
+  box-sizing: content-box;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  header {
+    grid-area: header;
+  }
+  footer {
+    grid-area: footer;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #header {
+    width: 100%;
+    position: fixed;
+    height: 40px;
+    top: 0;
+    box-shadow: 0 0 3px black;
+    background-color: white;
+    display: flex;
+    button[data-button="menu-control"] {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+  }
+  #app-body {
+    grid-area: body;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    max-height: 100%;
+    overflow: auto;
+    button.edit-button,
+    button.confirm-button {
+      position: absolute;
+      right: 5px;
+      top: 20px;
+    }
+    h1:first-of-type {
+      margin-top: 0;
+    }
+
+    .single-question {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      min-height: 100px;
+      border-bottom: 1px solid #ccc;
+      margin: 10px 0;
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+        &:after {
+          display: block;
+          margin-top: 5px;
+          content: "";
+        }
+      }
+      div.choose-question-type {
+        display: flex;
+        flex-direction: column;
+      }
+      .question-title-div {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 20px;
+        input.question-title-input {
+          border: none;
+          border-bottom: 1px solid black;
+          padding: 5px;
+          flex: 1;
+          &:focus {
+            outline: none;
+            border-bottom: 1px solid blue;
+          }
+        }
+      }
+      input:invalid {
+        border-color: red;
+      }
+    }
+  }
+}
