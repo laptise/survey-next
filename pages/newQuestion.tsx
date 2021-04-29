@@ -1,6 +1,5 @@
 import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
 import { Question, QuestionBlockProps, QuestionType } from "../interfaces";
@@ -63,7 +62,7 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
     setTitleState(target.value);
   };
 
-  const editButtonEvent = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const editButtonEvent = (_e: React.MouseEvent<HTMLButtonElement>) => {
     setEditingState(true);
   };
 
