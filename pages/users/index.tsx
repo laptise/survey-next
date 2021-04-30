@@ -2,7 +2,7 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 
 import { SurveySheet, User } from "../../interfaces";
-import { sampleUserData, surveySheets } from "../../utils/sample-data";
+import { surveySheets } from "../../utils/sample-data";
 import Layout from "../../components/Layout";
 import List from "../../components/List";
 
