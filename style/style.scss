@@ -1,3 +1,30 @@
+@keyframes jump {
+  0% {
+    transform: translateY(1px);
+  }
+  10% {
+    transform: translateY(-5px);
+  }
+  40% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
 header {
   position: fixed;
   top: 0;
@@ -5,12 +32,36 @@ header {
   background-color: white;
   left: 0;
   box-shadow: 0 0 3px black;
+  display: flex;
   nav {
     padding: 10px;
     a {
       text-decoration: none;
       color: black;
       font-weight: bold;
+    }
+  }
+  button {
+    all: unset;
+    margin-left: auto;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 500ms;
+    transform: rotate(0);
+    transform-origin: center;
+
+    svg {
+      margin: 0;
+    }
+    &:hover {
+      box-shadow: none !important;
+      transform: none !important;
+      animation: jump 1s;
+    }
+    &:active {
+      transform: rotate(180deg) !important;
     }
   }
 }

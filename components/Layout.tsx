@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   children?: ReactNode;
@@ -36,6 +38,9 @@ const Header = () => (
       </Link>{" "}
       | <a href="/api/users">Users API</a>
     </nav>
+    <button>
+      <FontAwesomeIcon icon={faGlobe} />
+    </button>
   </header>
 );
 
