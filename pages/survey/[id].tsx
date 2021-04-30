@@ -1,6 +1,6 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Layout from "../../components/Layout";
-import { SurveySheet } from "../../interfaces";
+import { Question, RadioSelect, SurveySheet } from "../../interfaces";
 import { surveySheets } from "../../utils/sample-data";
 
 interface Props {
@@ -13,9 +13,52 @@ export default function Survey({ sheet }: Props) {
     <Layout title={`${sheet.title} | Survey-next`}>
       <h1>{sheet.title}</h1>
       {sheet.questions?.map((question, index) => (
-        <div key={index}>{question.title}</div>
+        <SheetQuestion key={index} question={question} index={index} />
       ))}
     </Layout>
+  );
+}
+
+type SheetQuestionProps = {
+  question: Question;
+  index: number;
+};
+
+function SheetQuestion({ question, index }: SheetQuestionProps) {
+  const { questionType } = question;
+  return (
+    <div className={`single-question`}>
+      <span className="title">
+        {index + 1}. {question.title}
+      </span>
+      {questionType === "input" && <InputComponent />}
+      {questionType === "radioSelect" && <RadioSelectComponent index={index} radioSelect={question.answer as RadioSelect} />}
+    </div>
+  );
+}
+
+type InputComponent = {
+  index: number;
+};
+
+const InputComponent = () => <input />;
+
+type RadioSelectProps = {
+  index: number;
+  radioSelect: RadioSelect;
+};
+
+function RadioSelectComponent({ radioSelect, index }: RadioSelectProps) {
+  const { options } = radioSelect;
+  return (
+    <>
+      {options.map((option) => (
+        <label key={option.value}>
+          <input value={option.value} name={`${index}`} type="radio" />
+          <span>{option.label}</span>
+        </label>
+      ))}
+    </>
   );
 }
 

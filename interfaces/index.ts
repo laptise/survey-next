@@ -42,6 +42,8 @@ export type SurveySheet = {
   questions: Question[];
 };
 
+export type Answer = null | RadioSelect;
+
 /** 질문 클래스 */
 export type Question = {
   title: string;
