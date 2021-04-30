@@ -53,6 +53,11 @@ button {
     box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
   }
 }
+input {
+  &:read-only {
+    background-color: rgb(228, 228, 228, 0.5);
+  }
+}
 
 #app {
   display: grid;
@@ -152,6 +157,12 @@ button {
       }
       input:invalid {
         border-color: red !important;
+      }
+
+      .radio-select-builder {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
       }
     }
   }

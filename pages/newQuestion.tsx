@@ -1,8 +1,8 @@
 import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { Question, QuestionBlockProps, QuestionType, SurveySheet } from "../interfaces";
+import { Question, QuestionBlockProps, QuestionType, RadioOption, SurveySheet } from "../interfaces";
 
 export default function NewQuestion() {
   const newSurveySheet = new SurveySheet("");
@@ -117,8 +117,12 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
                 type="radio"
               />
               <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
-              {questionType === "input" && <div>주관식이네</div>}
-              {questionType === "radioSelect" && <div>객관식이네</div>}
+              {questionType === "input" && (
+                <div>
+                  <input readOnly={true} value="이곳에 입력을 받습니다" />
+                </div>
+              )}
+              {questionType === "radioSelect" && <RadioSelectBuilder />}
             </div>
           </div>
         </>
@@ -130,8 +134,28 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
           <span className="title">
             {index + 1}. {question.title}
           </span>
+          <div>{questionType === "input" ? <input readOnly={true} value="이곳에 입력을 받습니다" /> : <span>dada</span>}</div>
         </>
       )}
+    </div>
+  );
+}
+
+function RadioSelectBuilder() {
+  const [options, setOptions] = useState([] as RadioOption[]);
+  const addNeweOption = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const newOption = new RadioOption("1", "dd");
+    setOptions([...options, newOption]);
+  };
+  return (
+    <div className="radio-select-builder">
+      <button onClick={addNeweOption}>선택지 추가</button>
+      {options.map((option, index) => (
+        <label key={index}>
+          <input type="radio" name="113" value={option.value} />
+          <span>{option.label}</span>
+        </label>
+      ))}
     </div>
   );
 }
