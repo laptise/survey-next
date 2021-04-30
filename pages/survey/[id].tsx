@@ -10,7 +10,7 @@ interface Props {
 export default function Survey({ sheet }: Props) {
   console.log(sheet);
   return (
-    <Layout title="새로 만들기 | Survey-next">
+    <Layout title="설문 | Survey-next">
       <h1>{sheet.id}</h1>
       {sheet.questions?.map((question, index) => (
         <div key={index}>{question.title}</div>
