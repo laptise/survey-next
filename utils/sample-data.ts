@@ -13,20 +13,32 @@ export const existingIds = ["dfjj3l290ajs"];
 export const surveySheets: SurveySheet[] = [
   {
     id: "test",
-    title: "sample test",
+    title: "아침 식사",
     questions: [
       {
-        title: "test question",
+        title: "오늘 아침식사를 했나요?",
         questionType: "radioSelect",
         isEditing: false,
         answer: {
           options: [
-            { label: "hi", value: "1" },
-            { label: "hi2", value: "no" },
+            { label: "네", value: "1" },
+            { label: "아니오", value: "0" },
           ],
         },
       },
-      { title: "input", questionType: "input", isEditing: false, answer: null },
+      { title: "먹었다면 뭐 먹었나요?", questionType: "input", isEditing: false, answer: null },
+      {
+        title: "어땠나요?",
+        questionType: "radioSelect",
+        isEditing: false,
+        answer: {
+          options: [
+            { label: "굉장히 맛있었음", value: "1" },
+            { label: "그냥 그랬음", value: "2" },
+            { label: "먹다 남겼음", value: "3" },
+          ],
+        },
+      },
     ],
   },
 ];

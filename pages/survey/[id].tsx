@@ -41,7 +41,7 @@ type InputComponent = {
   index: number;
 };
 
-const InputComponent = () => <input />;
+const InputComponent = () => <input autoComplete={"off"} spellCheck={false} />;
 
 type RadioSelectProps = {
   index: number;
