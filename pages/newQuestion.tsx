@@ -5,12 +5,12 @@ import Layout from "../components/Layout";
 import { Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SurveySheet } from "../interfaces";
 
 export default function NewQuestion() {
-  const newSurveySheet = new SurveySheet("");
+  const newSurveySheet: SurveySheet = { id: "", title: "", questions: [] };
   const [questionList, setQuestionList] = useState(newSurveySheet.questions as Question[]);
 
   /** 새 질문 추가 */
   function addNewQuestion() {
-    const newQuestion = new Question("", "input");
+    const newQuestion: Question = { title: "", questionType: "input", isEditing: true, answer: null };
     setQuestionList([...questionList, newQuestion]);
   }
 
@@ -23,13 +23,21 @@ export default function NewQuestion() {
       return;
     }
     fetch("/api/questions/addNew", {
+      method: "post",
       headers: {
         dasd: "asd",
       },
+      body: JSON.stringify(newSurveySheet),
     })
       .then((res) => res.json())
       .then(console.log);
   }
+
+  function updateSheet() {
+    newSurveySheet.questions = questionList;
+  }
+
+  useEffect(updateSheet, [questionList]);
 
   return (
     <Layout title="새로 만들기 | Survey-next">

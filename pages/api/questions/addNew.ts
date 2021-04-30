@@ -1,8 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { existingIds } from "../../../utils/sample-data";
 
-const handler = (_req: NextApiRequest, res: NextApiResponse) => {
+const handler = (req: NextApiRequest, res: NextApiResponse) => {
   try {
+    console.log(req.body);
     // if (req.headers["serial"] !== "success") throw new Error("bad request");
     if (!Array.isArray(existingIds)) {
       throw new Error("Cannot find user data");

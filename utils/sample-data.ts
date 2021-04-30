@@ -1,4 +1,4 @@
-import { Question, SurveySheet, User } from "../interfaces";
+import { SurveySheet, User } from "../interfaces";
 
 /** Dummy user data. */
 export const sampleUserData: User[] = [
@@ -10,4 +10,23 @@ export const sampleUserData: User[] = [
 
 export const existingIds = ["dfjj3l290ajs"];
 
-export const surveySheets: SurveySheet[] = [new SurveySheet("test", [new Question("TEST QUESTION?", "radioSelect")])];
+export const surveySheets: SurveySheet[] = [
+  {
+    id: "test",
+    title: "sample test",
+    questions: [
+      {
+        title: "test question",
+        questionType: "radioSelect",
+        isEditing: false,
+        answer: {
+          options: [
+            { label: "hi", value: "1" },
+            { label: "hi2", value: "no" },
+          ],
+        },
+      },
+      { title: "input", questionType: "input", isEditing: false, answer: null },
+    ],
+  },
+];

@@ -36,31 +36,22 @@ export class RadioSelect extends Select {
   }
 }
 
-export class SurveySheet {
+export type SurveySheet = {
+  title: string;
   id: string;
-  questions: undefined | Question[];
-  constructor(id: string, questions = [] as Question[]) {
-    this.id = id;
-    this.questions = questions;
-  }
-}
+  questions: Question[];
+};
 
 /** 질문 클래스 */
-export class Question {
+export type Question = {
   title: string;
 
-  isEditing: boolean = true;
+  isEditing: boolean;
 
   questionType: QuestionType;
 
   answer: null | RadioSelect;
-
-  constructor(title: string, questionType: QuestionType) {
-    this.title = title;
-    this.answer = null;
-    this.questionType = questionType;
-  }
-}
+};
 
 /** 질문 블록 프로퍼티 */
 export interface QuestionBlockProps {
