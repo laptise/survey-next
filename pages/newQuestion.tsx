@@ -2,14 +2,15 @@ import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { Question, QuestionBlockProps, QuestionType } from "../interfaces";
+import { Question, QuestionBlockProps, QuestionType, SurveySheet } from "../interfaces";
 
 export default function NewQuestion() {
-  const [questionList, setQuestionList] = useState([] as Question[]);
+  const newSurveySheet = new SurveySheet("");
+  const [questionList, setQuestionList] = useState(newSurveySheet.questions as Question[]);
 
   /** 새 질문 추가 */
   function addNewQuestion() {
-    const newQuestion = new Question("");
+    const newQuestion = new Question("", "input");
     setQuestionList([...questionList, newQuestion]);
   }
 
@@ -26,9 +27,11 @@ export default function NewQuestion() {
       </div>
       <button
         onClick={() => {
-          fetch("/api/users/test", {
+          console.log(questionList);
+          fetch("/api/questions/addNew", {
             headers: {
               dasd: "asd",
+              body: JSON.stringify(questionList),
             },
           })
             .then((res) => res.json())
@@ -46,7 +49,7 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
   const [editingState, setEditingState] = useState(question.isEditing);
   const [titleState, setTitleState] = useState(question.title);
   const titleInput = useRef((null as unknown) as HTMLInputElement);
-  const [questionType, setQuestionType] = useState((null as unknown) as QuestionType);
+  const [questionType, setQuestionType] = useState(question.questionType as QuestionType);
 
   /** 질문 변경내용 저장 */
   const submit = () => {

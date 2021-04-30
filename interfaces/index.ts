@@ -36,6 +36,15 @@ export class RadioSelect extends Select {
   }
 }
 
+export class SurveySheet {
+  id: string;
+  questions: undefined | Question[];
+  constructor(id: string, questions = [] as Question[]) {
+    this.id = id;
+    this.questions = questions;
+  }
+}
+
 /** 질문 클래스 */
 export class Question {
   title: string;
@@ -46,9 +55,10 @@ export class Question {
 
   answer: null | RadioSelect;
 
-  constructor(title: string) {
+  constructor(title: string, questionType: QuestionType) {
     this.title = title;
     this.answer = null;
+    this.questionType = questionType;
   }
 }
 
