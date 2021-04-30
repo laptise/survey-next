@@ -2,7 +2,7 @@ import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { Question, QuestionBlockProps, QuestionType, RadioOption, SurveySheet } from "../interfaces";
+import { Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SurveySheet } from "../interfaces";
 
 export default function NewQuestion() {
   const newSurveySheet = new SurveySheet("");
@@ -122,7 +122,7 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
                   <input readOnly={true} value="이곳에 입력을 받습니다" />
                 </div>
               )}
-              {questionType === "radioSelect" && <RadioSelectBuilder />}
+              {questionType === "radioSelect" && <RadioSelectBuilder question={question} />}
             </div>
           </div>
         </>
@@ -141,15 +141,44 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
   );
 }
 
-function RadioSelectBuilder() {
-  const [options, setOptions] = useState([] as RadioOption[]);
+interface RadioSelectBuilderProps {
+  question: Question;
+}
+
+function RadioSelectBuilder({ question }: RadioSelectBuilderProps) {
+  const radioSelect = new RadioSelect([]);
+  const [options, setOptions] = useState(radioSelect.options as RadioOption[]);
+  const [labelName, setLabelName] = useState("");
+  const [valueName, setValueName] = useState("");
   const addNeweOption = () => {
-    const newOption = new RadioOption("1", "dd");
+    const newOption = new RadioOption(labelName, valueName);
     setOptions([...options, newOption]);
+    setLabelName("");
+    setValueName("");
   };
+  const labelNameInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setLabelName(e.currentTarget.value);
+  };
+
+  const valueNameInput = (e: React.FormEvent<HTMLInputElement>) => {
+    setValueName(e.currentTarget.value);
+  };
+
+  const updateQuestion = () => {
+    question.questionType = "radioSelect";
+    radioSelect.options = options;
+    question.answer = radioSelect;
+  };
+  useEffect(updateQuestion, [options]);
   return (
     <div className="radio-select-builder">
-      <button onClick={addNeweOption}>선택지 추가</button>
+      <div>
+        <input onInput={valueNameInput} placeholder="값" value={valueName} />
+        <input onInput={labelNameInput} value={labelName} placeholder="선택지 라벨" />
+        <button disabled={!valueName || !labelName} onClick={addNeweOption}>
+          선택지 추가
+        </button>
+      </div>
       {options.map((option, index) => (
         <label key={index}>
           <input type="radio" name="113" value={option.value} />
