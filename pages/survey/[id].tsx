@@ -12,6 +12,7 @@ export default function Survey({ sheet }: Props) {
   return (
     <Layout title={`${sheet.title} | Survey-next`}>
       <h1>{sheet.title}</h1>
+      {sheet.createdAt && <small>{sheet.createdAt.toLocaleString()}</small>}
       {sheet.questions?.map((question, index) => (
         <SheetQuestion key={index} question={question} index={index} />
       ))}

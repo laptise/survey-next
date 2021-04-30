@@ -39,6 +39,7 @@ export class RadioSelect extends Select {
 export type SurveySheet = {
   title: string;
   id: string;
+  createdAt?: Date;
   questions: Question[];
 };
 
