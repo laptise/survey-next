@@ -14,6 +14,23 @@ export default function NewQuestion() {
     setQuestionList([...questionList, newQuestion]);
   }
 
+  /** 질문 등록 */
+  function submit() {
+    /** 편집중인 질문 */
+    const unFilledQuestion = questionList.find((question) => question.isEditing);
+    if (unFilledQuestion) {
+      window.alert("편집이 완료되지 않은 문항이 있습니다. 확인해주세요");
+      return;
+    }
+    fetch("/api/questions/addNew", {
+      headers: {
+        dasd: "asd",
+      },
+    })
+      .then((res) => res.json())
+      .then(console.log);
+  }
+
   return (
     <Layout title="새로 만들기 | Survey-next">
       <h1>새 질문 만들기</h1>
@@ -25,21 +42,7 @@ export default function NewQuestion() {
           <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
         </button>
       </div>
-      <button
-        onClick={() => {
-          console.log(questionList);
-          fetch("/api/questions/addNew", {
-            headers: {
-              dasd: "asd",
-              body: JSON.stringify(questionList),
-            },
-          })
-            .then((res) => res.json())
-            .then(console.log);
-        }}
-      >
-        ?dd
-      </button>
+      <button onClick={submit}>질문 등록하기</button>
     </Layout>
   );
 }

@@ -18,6 +18,10 @@ body {
   background: linear-gradient(335deg, rgba(34, 162, 195, 1) 0%, rgba(190, 229, 247, 1) 100%) fixed;
 }
 
+a {
+  color: inherit;
+}
+
 button {
   all: unset;
   border: 1px solid #ccc;
@@ -76,14 +80,14 @@ input {
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 45px;
   header {
     grid-area: header;
   }
   footer {
     grid-area: footer;
     color: white;
-    text-shadow: 1px 1px 3px black;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,11 +108,11 @@ input {
   #app-body {
     grid-area: body;
     background-color: white;
-    border-radius: 10px;
-    margin: 10px;
+    border-radius: 5px;
     padding: 10px;
     max-height: 100%;
     overflow: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
     button.edit-button,
     button.confirm-button {
       position: absolute;
