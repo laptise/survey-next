@@ -143,7 +143,7 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
 
 function RadioSelectBuilder() {
   const [options, setOptions] = useState([] as RadioOption[]);
-  const addNeweOption = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const addNeweOption = () => {
     const newOption = new RadioOption("1", "dd");
     setOptions([...options, newOption]);
   };
