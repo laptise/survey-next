@@ -11,8 +11,10 @@ export default function Survey({ sheet }: Props) {
   console.log(sheet);
   return (
     <Layout title={`${sheet.title} | Survey-next`}>
-      <h1>{sheet.title}</h1>
-      {sheet.createdAt && <small>{sheet.createdAt.toLocaleString()}</small>}
+      <div className="question-header">
+        <h1>{sheet.title}</h1>
+        {sheet.createdAt && <small>{sheet.createdAt.toLocaleString()}</small>}
+      </div>
       {sheet.questions?.map((question, index) => (
         <SheetQuestion key={index} question={question} index={index} />
       ))}
@@ -32,8 +34,10 @@ function SheetQuestion({ question, index }: SheetQuestionProps) {
       <span className="title">
         {index + 1}. {question.title}
       </span>
-      {questionType === "input" && <InputComponent />}
-      {questionType === "radioSelect" && <RadioSelectComponent index={index} radioSelect={question.answer as RadioSelect} />}
+      <div className="answer-area">
+        {questionType === "input" && <InputComponent />}
+        {questionType === "radioSelect" && <RadioSelectComponent index={index} radioSelect={question.answer as RadioSelect} />}
+      </div>
     </div>
   );
 }
