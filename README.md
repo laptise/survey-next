@@ -9,9 +9,13 @@
 
 ## 기술 스택
 
-- React.js(Next.js)
+- Node.js API Server on Next.js
+- React.js (on Next.js)
+- React Hooks
 - Typescript
-- MySql
+- Scss (Sass)
+- MySql (예정)
+- EsLint (예정)
 - etc..
 
 ## 개발환경 구축 및 테스트
