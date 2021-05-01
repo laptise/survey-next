@@ -78,6 +78,13 @@
     max-height: 100%;
     overflow: auto;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    .button-tools {
+      display: flex;
+      justify-content: space-between;
+      button {
+        margin: 10px 0;
+      }
+    }
     .main-section {
       padding: 20px 10px;
       border-radius: 4px;
@@ -119,12 +126,7 @@
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
       }
     }
-    button.edit-button,
-    button.confirm-button {
-      position: absolute;
-      right: 5px;
-      top: 20px;
-    }
+
     #new-question-title {
       position: relative;
       padding-bottom: 5px;

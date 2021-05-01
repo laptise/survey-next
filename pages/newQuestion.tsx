@@ -52,14 +52,14 @@ export default function NewQuestion() {
       {questionList.map((question, index) => (
         <QuestionBlock question={question} index={index} key={index} />
       ))}
-      <div id="add-new-question">
+      <div className="button-tools">
         <button onClick={addNewQuestion}>
           <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
         </button>
+        <button id="submit-sheet" onClick={submit}>
+          질문 등록하기
+        </button>
       </div>
-      <button id="submit-sheet" onClick={submit}>
-        질문 등록하기
-      </button>
     </Layout>
   );
 }
@@ -106,57 +106,59 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
     <div className={`single-question ${editingState ? "is-editing" : ""}`}>
       {editingState ? (
         <>
-          <button className="confirm-button" onClick={submit}>
-            <FontAwesomeIcon icon={faSave} />
-            저장
-          </button>
+          <div className="choose-question-type">
+            <span>質問のタイプを選択</span>
+            <div className="radios">
+              <input
+                name={`qeustion${index}`}
+                id={`qeustion${index}-type-1`}
+                onChange={(e) => {
+                  if (e.target.checked) setQuestionType("input");
+                }}
+                checked={questionType === "input"}
+                type="radio"
+              />
+              <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
+              <input
+                onChange={(e) => {
+                  if (e.target.checked) setQuestionType("radioSelect");
+                }}
+                checked={questionType === "radioSelect"}
+                name={`qeustion${index}`}
+                id={`qeustion${index}-type-2`}
+                type="radio"
+              />
+              <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
+            </div>
+          </div>
+
           <div className="question-title-div">
             {index + 1}.
             <input ref={titleInput} placeholder="質問を入力" value={titleState} onInput={titleInputEvent} className="question-title-input title" />
           </div>
-          <div className="choose-question-type">
-            <span>質問のタイプを選択</span>
-            <div className="set-answers">
-              <div className="radios">
-                <input
-                  name={`qeustion${index}`}
-                  id={`qeustion${index}-type-1`}
-                  onChange={(e) => {
-                    if (e.target.checked) setQuestionType("input");
-                  }}
-                  checked={questionType === "input"}
-                  type="radio"
-                />
-                <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
-                <input
-                  onChange={(e) => {
-                    if (e.target.checked) setQuestionType("radioSelect");
-                  }}
-                  checked={questionType === "radioSelect"}
-                  name={`qeustion${index}`}
-                  id={`qeustion${index}-type-2`}
-                  type="radio"
-                />
-                <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
+          <div className="set-answers">
+            {questionType === "input" && (
+              <div>
+                <input readOnly={true} value="이곳에 입력을 받습니다" />
               </div>
-              {questionType === "input" && (
-                <div>
-                  <input readOnly={true} value="이곳에 입력을 받습니다" />
-                </div>
-              )}
-              {questionType === "radioSelect" && <RadioSelectBuilder question={question} />}
-            </div>
+            )}
+            {questionType === "radioSelect" && <RadioSelectBuilder question={question} />}
           </div>
+          <button className="confirm-button" onClick={submit}>
+            <FontAwesomeIcon icon={faSave} />
+            저장
+          </button>
         </>
       ) : (
         <>
-          <button className="edit-button" onClick={editButtonEvent}>
-            <FontAwesomeIcon icon={faPen} />
-          </button>
           <span className="title">
             {index + 1}. {question.title}
           </span>
           <div>{questionType === "input" ? <input readOnly={true} value="이곳에 입력을 받습니다" /> : <span>dada</span>}</div>
+          <button className="edit-button" onClick={editButtonEvent}>
+            <FontAwesomeIcon icon={faPen} />
+            수정
+          </button>
         </>
       )}
     </div>
@@ -195,7 +197,7 @@ function RadioSelectBuilder({ question }: RadioSelectBuilderProps) {
   return (
     <div className="radio-select-builder">
       <div>
-        <input onInput={valueNameInput} placeholder="값" value={valueName} />
+        <input onInput={valueNameInput} type={"number"} placeholder="값" value={valueName} />
         <input onInput={labelNameInput} value={labelName} placeholder="선택지 라벨" />
         <button disabled={!valueName || !labelName} onClick={addNeweOption}>
           선택지 추가
