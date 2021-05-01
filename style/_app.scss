@@ -1,0 +1,142 @@
+/* 어플리케이션 콘텐츠 스타일 */
+#app {
+  display: grid;
+  grid-template:
+    "header"
+    "body"
+    "footer";
+  grid-template-columns: 100%;
+  box-sizing: content-box;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 45px;
+  header {
+    grid-area: header;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    display: flex;
+    nav {
+      padding: 10px;
+      a {
+        text-decoration: none;
+      }
+    }
+    button {
+      all: unset;
+      margin-left: auto;
+      font-weight: bold;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 500ms;
+      transform: rotate(0);
+      transform-origin: center;
+
+      svg {
+        margin: 0;
+      }
+      &:hover {
+        box-shadow: none !important;
+        transform: none !important;
+        animation: jump 1s;
+      }
+      &:active {
+        transform: rotate(180deg) !important;
+      }
+    }
+  }
+  footer {
+    padding: 20px;
+    grid-area: footer;
+    color: #333;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #header {
+    width: 100%;
+    position: fixed;
+    height: 40px;
+    top: 0;
+    box-shadow: 0 0 3px black;
+    background-color: white;
+    display: flex;
+    button[data-button="menu-control"] {
+      margin-left: auto;
+      margin-right: 10px;
+    }
+  }
+  #app-body {
+    grid-area: body;
+    border-radius: 5px;
+    padding: 10px;
+    max-height: 100%;
+    overflow: auto;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    .main-section {
+      padding: 20px 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 30%;
+      align-items: center;
+      .section-icon {
+        font-size: 30px;
+        margin: 10px;
+      }
+      h2 {
+        margin: 0;
+        text-align: center;
+        // color: white;
+      }
+      margin: 7.5px;
+      p {
+        margin: 10px 0;
+        font-size: 13px;
+        color: #333;
+        text-align: center;
+      }
+      button {
+        margin-top: auto;
+        display: inline-flex;
+        justify-content: center;
+        cursor: pointer;
+        text-decoration: none;
+        // background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
+        background: #777;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      }
+    }
+    button.edit-button,
+    button.confirm-button {
+      position: absolute;
+      right: 5px;
+      top: 20px;
+    }
+    .question-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      h1:first-of-type {
+        text-align: center;
+        margin: 0;
+      }
+    }
+    @import "./SingleQuestion";
+    button#submit-sheet {
+      margin: 10px 0;
+    }
+  }
+}

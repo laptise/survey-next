@@ -1,0 +1,53 @@
+/* 글로벌 스타일 시트 */
+a {
+  color: inherit;
+}
+
+button {
+  all: unset;
+  border: 1px solid #ccc;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 13px;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+  transition: all 50ms;
+  font-weight: bold;
+  vertical-align: middle;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    rgba(249, 249, 249, 1) 0%,
+    rgb(240, 240, 240) 6%,
+    rgb(233, 233, 233) 71%,
+    rgb(233, 233, 233) 88%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  text-shadow: 0 0 5px rgb(255, 255, 255, 0.3);
+  svg {
+    margin: 3px;
+    margin-top: 1px;
+  }
+  &:not(:disabled) {
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+input {
+  &:read-only {
+    background-color: rgb(228, 228, 228, 0.5);
+  }
+}
+
+body {
+  margin: 0;
+}
