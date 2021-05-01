@@ -49,6 +49,7 @@ export default function NewQuestion() {
       <div id="new-question-title">
         <input onInput={sheetNameInput} value={sheetName} spellCheck={false} placeholder="설문지 제목 입력" />
       </div>
+      <ConfigSection />
       {questionList.map((question, index) => (
         <QuestionBlock question={question} index={index} key={index} />
       ))}
@@ -61,6 +62,61 @@ export default function NewQuestion() {
         </button>
       </div>
     </Layout>
+  );
+}
+
+// type ConfigSectionProps = {
+//   question: Question;
+// };
+/** 설정 섹션 */
+function ConfigSection() {
+  const [open, setOpen] = useState(false);
+  const [manualOptionValue, setManualOptionValue] = useState(false);
+
+  return (
+    <div id="new-config">
+      <div onClick={() => setOpen(!open)} className="header">
+        고급 설정
+      </div>
+      {open && (
+        <div className="body">
+          <div className="config-item">
+            <span className="title">선택지 값 선택방식</span>
+            <span className="description">
+              객관식 문항의 선택지 값을 어떻게 설정할 지 정할 수 있습니다. 선택지의 값은 응답자가 어떤 선택지를 선택했는지 파악하는데에 이용됩니다. 이
+              값은 설문 결과를 분석하는데 이용할 수 있습니다.
+            </span>
+            <div className="selection">
+              <label className="single-option">
+                <input
+                  type="radio"
+                  onChange={() => setManualOptionValue(false)}
+                  value={0}
+                  name="optionValueName"
+                  checked={manualOptionValue === false}
+                />
+                <span className="title">자동 값 생성 (기본)</span>
+                <span className="description">선택지의 순서대로 값이 오름차 순으로 자동 부여됩니다. 간편하게 이용할 수 있습니다.</span>
+              </label>
+              <label className="single-option">
+                <input
+                  type="radio"
+                  onChange={() => setManualOptionValue(true)}
+                  value={1}
+                  name="optionValueName"
+                  checked={manualOptionValue === true}
+                />
+                <span className="title">수동 값 생성</span>
+                <span className="description">
+                  작성자가 값을 수동으로 지정해야하지만 선택지의 순서를 자유롭게 놓을 수 있어, 응답자가 의도를 파악할 수 없게 하는데 도움을 줄 수
+                  있습니다.
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

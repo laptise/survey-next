@@ -150,6 +150,67 @@
         background-color: #333;
       }
     }
+    #new-config {
+      display: flex;
+      flex-direction: column;
+      div.header {
+        background: #979797;
+        padding: 5px;
+        font-weight: bold;
+        color: white;
+        text-shadow: 1px 1px 1px rgb(0 0 0 / 30%);
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 50ms;
+        &:hover {
+          filter: brightness(1.1);
+        }
+        &:active {
+          opacity: 1;
+          filter: brightness(1.2);
+        }
+      }
+      div.body {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+        div.config-item {
+          display: flex;
+          flex-direction: column;
+          .title {
+            font-weight: bold;
+            text-align: center;
+          }
+          .description {
+            font-size: 12px;
+            text-align: center;
+          }
+          .selection {
+            display: flex;
+            label.single-option {
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              padding: 10px;
+              margin: 5px;
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              .title {
+                font-weight: bold;
+                font-size: 14px;
+              }
+              .description {
+                font-size: 12px;
+              }
+              input {
+                margin: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
     .question-header {
       display: flex;
       flex-direction: column;
