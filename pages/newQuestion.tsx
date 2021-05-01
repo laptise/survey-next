@@ -7,6 +7,7 @@ import { Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, S
 export default function NewQuestion() {
   const newSurveySheet: SurveySheet = { id: "", title: "", questions: [] };
   const [questionList, setQuestionList] = useState(newSurveySheet.questions as Question[]);
+  const [sheetName, setSheetName] = useState(newSurveySheet.title);
 
   /** 새 질문 추가 */
   function addNewQuestion() {
@@ -35,13 +36,19 @@ export default function NewQuestion() {
 
   function updateSheet() {
     newSurveySheet.questions = questionList;
+    newSurveySheet.title = sheetName;
   }
 
-  useEffect(updateSheet, [questionList]);
+  function sheetNameInput(e: React.FormEvent<HTMLInputElement>) {
+    setSheetName(e.currentTarget.value);
+  }
+  useEffect(updateSheet, [questionList, sheetName]);
 
   return (
     <Layout title="새로 만들기 | Survey-next">
-      <h1>새 질문 만들기</h1>
+      <div id="new-question-title">
+        <input onInput={sheetNameInput} value={sheetName} spellCheck={false} placeholder="설문지 제목 입력" />
+      </div>
       {questionList.map((question, index) => (
         <QuestionBlock question={question} index={index} key={index} />
       ))}
