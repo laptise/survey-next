@@ -223,7 +223,7 @@ body {
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 10px 0;
+        padding: 10px;
         min-height: 100px;
         border-bottom: 1px solid #ccc;
         margin: 10px 0;
@@ -241,39 +241,61 @@ body {
           flex-direction: column;
           padding: 10px 20px;
         }
-        div.choose-question-type {
-          display: flex;
-          flex-direction: column;
-          span {
-            margin: 10px 0;
-            font-weight: bold;
-          }
-        }
-        .question-title-div {
-          display: flex;
-          align-items: center;
-          font-weight: bold;
-          font-size: 20px;
-          input.question-title-input {
-            border: none;
-            border-bottom: 1px solid black;
-            padding: 5px;
-            flex: 1;
-            &:focus {
-              outline: none;
-              border-bottom: 1px solid blue;
-            }
-          }
-        }
+
         input:invalid {
           border-color: red !important;
         }
 
-        .radio-select-builder {
-          display: flex;
-          flex-direction: column;
-          padding: 10px 0;
+        &.is-editing {
+          border: 1px solid black;
+          border-radius: 4px;
+          .confirm-button {
+            margin-top: 0;
+          }
+          .question-title-div {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+            input.question-title-input {
+              border: none;
+              border-bottom: 1px solid black;
+              padding: 5px;
+              flex: 1;
+              &:focus {
+                outline: none;
+                border-bottom: 1px solid blue;
+              }
+            }
+          }
+          div.set-answers {
+            padding: 10px;
+            .radios {
+              margin-bottom: 5px;
+            }
+          }
+          div.choose-question-type {
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+            border: 1px solid black;
+            span {
+              padding: 5px;
+              font-weight: bold;
+              background: #333;
+              color: white;
+              font-size: 14px;
+            }
+            .radio-select-builder {
+              display: flex;
+              flex-direction: column;
+            }
+          }
         }
+      }
+      button#submit-sheet {
+        margin: 10px 0;
       }
     }
   }

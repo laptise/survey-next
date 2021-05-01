@@ -50,7 +50,9 @@ export default function NewQuestion() {
           <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
         </button>
       </div>
-      <button onClick={submit}>질문 등록하기</button>
+      <button id="submit-sheet" onClick={submit}>
+        질문 등록하기
+      </button>
     </Layout>
   );
 }
@@ -107,27 +109,29 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
           </div>
           <div className="choose-question-type">
             <span>質問のタイプを選択</span>
-            <div>
-              <input
-                name={`qeustion${index}`}
-                id={`qeustion${index}-type-1`}
-                onChange={(e) => {
-                  if (e.target.checked) setQuestionType("input");
-                }}
-                checked={questionType === "input"}
-                type="radio"
-              />
-              <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
-              <input
-                onChange={(e) => {
-                  if (e.target.checked) setQuestionType("radioSelect");
-                }}
-                checked={questionType === "radioSelect"}
-                name={`qeustion${index}`}
-                id={`qeustion${index}-type-2`}
-                type="radio"
-              />
-              <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
+            <div className="set-answers">
+              <div className="radios">
+                <input
+                  name={`qeustion${index}`}
+                  id={`qeustion${index}-type-1`}
+                  onChange={(e) => {
+                    if (e.target.checked) setQuestionType("input");
+                  }}
+                  checked={questionType === "input"}
+                  type="radio"
+                />
+                <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
+                <input
+                  onChange={(e) => {
+                    if (e.target.checked) setQuestionType("radioSelect");
+                  }}
+                  checked={questionType === "radioSelect"}
+                  name={`qeustion${index}`}
+                  id={`qeustion${index}-type-2`}
+                  type="radio"
+                />
+                <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
+              </div>
               {questionType === "input" && (
                 <div>
                   <input readOnly={true} value="이곳에 입력을 받습니다" />
