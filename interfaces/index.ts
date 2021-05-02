@@ -36,11 +36,26 @@ export class RadioSelect extends Select {
   }
 }
 
+export type SheetConfig = {
+  manualOptionValue: boolean;
+};
+
 export type SurveySheet = {
   title: string;
+  config: SheetConfig;
   id: string;
   createdAt?: Date;
   questions: Question[];
+};
+
+/** 설문시트 초기형 */
+export const initialSurveySheet: SurveySheet = {
+  id: "",
+  title: "",
+  questions: [],
+  config: {
+    manualOptionValue: false,
+  },
 };
 
 export type Answer = null | RadioSelect;

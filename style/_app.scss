@@ -203,6 +203,12 @@
               .description {
                 font-size: 12px;
               }
+              .warn {
+                margin-top: 5px;
+                color: $bsRed;
+                font-size: 12px;
+                text-align: center;
+              }
               input {
                 margin: 5px;
               }
