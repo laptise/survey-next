@@ -13,12 +13,15 @@
   align-items: center;
   padding-top: 45px;
   header {
+    background-color: rgba(255, 255, 255, 0.9);
     grid-area: header;
     position: fixed;
     top: 0;
     width: 100%;
     left: 0;
     display: flex;
+    z-index: 5;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     nav {
       padding: 10px;
       a {
