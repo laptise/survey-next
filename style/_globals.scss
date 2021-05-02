@@ -30,6 +30,7 @@ button {
     margin-top: 1px;
   }
   &:not(:disabled) {
+    cursor: pointer;
     &:hover {
       transform: translateY(-1px);
     }
@@ -40,6 +41,7 @@ button {
   }
   &:disabled {
     opacity: 0.5;
+    background: rgba(233, 233, 233, 1);
   }
 }
 input {

@@ -46,6 +46,8 @@ export default function NewQuestion() {
     setSheetName(e.currentTarget.value);
   }
 
+  const submitButtonValidity = questionList?.length > 0;
+
   useEffect(updateSheet, [questionList, sheetName]);
 
   return (
@@ -62,7 +64,7 @@ export default function NewQuestion() {
           <button onClick={addNewQuestion}>
             <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
           </button>
-          <button id="submit-sheet" onClick={submit}>
+          <button disabled={!submitButtonValidity} id="submit-sheet" onClick={submit}>
             질문 등록하기
           </button>
         </div>
