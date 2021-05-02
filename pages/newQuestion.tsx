@@ -102,7 +102,7 @@ function ConfigSection() {
             </span>
 
             <div className="selection">
-              <label className="single-option">
+              <label className="single-option" data-checked={`${manualOptionValue === false ? "true" : ""}`}>
                 <input
                   type="radio"
                   onChange={() => setManualOptionValue(false)}
@@ -113,7 +113,7 @@ function ConfigSection() {
                 <span className="title">자동 값 생성 (기본)</span>
                 <span className="description">선택지의 순서대로 값이 오름차 순으로 자동 부여됩니다. 간편하게 이용할 수 있습니다.</span>
               </label>
-              <label className="single-option">
+              <label className="single-option" data-checked={`${manualOptionValue === true ? "true" : ""}`}>
                 <input
                   type="radio"
                   onChange={() => setManualOptionValue(true)}

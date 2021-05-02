@@ -27,10 +27,13 @@ type SheetQuestionProps = {
   index: number;
 };
 
-function SheetQuestion({ question, index }: SheetQuestionProps) {
+function SheetQuestion(props: SheetQuestionProps) {
+  const { question, index } = props;
   const { questionType } = question;
   return (
     <div className={`single-question`}>
+      <Tags {...props} />
+      <span></span>
       <span className="title">
         {index + 1}. {question.title}
       </span>
@@ -38,6 +41,19 @@ function SheetQuestion({ question, index }: SheetQuestionProps) {
         {questionType === "input" && <InputComponent />}
         {questionType === "radioSelect" && <RadioSelectComponent index={index} radioSelect={question.answer as RadioSelect} />}
       </div>
+    </div>
+  );
+}
+
+function Tags({ question }: SheetQuestionProps) {
+  const questionTypeLabel = question.questionType === "input" ? "주관식" : "객관식";
+  const optionTypeLabel = "단수 선택";
+  const tags = [questionTypeLabel, optionTypeLabel];
+  return (
+    <div className="tags">
+      {tags.map((tag, index) => (
+        <span key={index}>{tag}</span>
+      ))}
     </div>
   );
 }
