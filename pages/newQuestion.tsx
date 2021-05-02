@@ -2,7 +2,7 @@ import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import Layout from "../components/Layout";
-import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SheetConfig, SurveySheet } from "../interfaces";
+import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SurveySheet } from "../interfaces";
 
 const SheetContext = React.createContext(([] as unknown) as [SurveySheet, React.Dispatch<React.SetStateAction<SurveySheet>>]);
 export default function NewQuestion() {
