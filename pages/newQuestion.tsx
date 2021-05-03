@@ -13,7 +13,6 @@ export default function NewQuestion() {
   const [questionList, setQuestionList] = useState(sheet.questions as Question[]);
   const [sheetName, setSheetName] = useState(sheet.title);
   const router = useRouter();
-  console.log(router);
   /** 새 질문 추가 */
   function addNewQuestion() {
     const newQuestion: Question = { title: "", questionType: "input", isEditing: true, answer: null };
@@ -29,8 +28,8 @@ export default function NewQuestion() {
       window.alert("편집이 완료되지 않은 문항이 있습니다. 확인해주세요");
       return;
     }
-    console.log(sheet);
-    // router.push("checkQuestion");
+    localStorage.setItem("tmpSheet", JSON.stringify(sheet));
+    router.push("checkQuestion");
   }
 
   /** 설문지 내용 업데이트 */
@@ -62,7 +61,7 @@ export default function NewQuestion() {
             <FontAwesomeIcon icon={faPlus} /> 새질문 추가하기
           </button>
           <button disabled={!submitButtonValidity} id="submit-sheet" onClick={submit}>
-            질문 등록하기
+            다음 단계로
           </button>
         </div>
       </Layout>

@@ -1,4 +1,3 @@
-import Layout from "./Layout";
 import { Question, RadioSelect, SurveySheet } from "../interfaces";
 import { ReactNode } from "react";
 
@@ -8,7 +7,7 @@ export interface SheetProps {
 
 export default function Survey({ sheet }: SheetProps) {
   return (
-    <Layout title={`${sheet.title} | Survey-next`}>
+    <>
       <div className="question-header">
         <h1>{sheet.title}</h1>
         {sheet.createdAt && <small>{sheet.createdAt.toLocaleString()}</small>}
@@ -16,7 +15,7 @@ export default function Survey({ sheet }: SheetProps) {
       {sheet.questions?.map((question, index) => (
         <SheetQuestion key={index} question={question} index={index} />
       ))}
-    </Layout>
+    </>
   );
 }
 

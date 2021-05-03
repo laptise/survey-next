@@ -1,8 +1,14 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import React from "react";
+import Layout from "../../components/Layout";
 import Survey, { SheetProps } from "../../components/ViewSheet";
 import { surveySheets } from "../../utils/sample-data";
 
-const AnswerSheet = ({ sheet }: SheetProps) => <Survey sheet={sheet} />;
+const AnswerSheet = ({ sheet }: SheetProps) => (
+  <Layout title={`${sheet.title} | Survey-next`}>
+    <Survey sheet={sheet} />
+  </Layout>
+);
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on users
