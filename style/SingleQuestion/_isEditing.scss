@@ -23,9 +23,7 @@
   }
   div.set-answers {
     padding: 10px;
-    .radios {
-      margin-bottom: 5px;
-    }
+
     .radio-select-builder {
       display: flex;
       flex-direction: column;
@@ -58,6 +56,10 @@
       padding: 0 10px;
       display: inline-flex;
       justify-content: center;
+      label {
+        color: white;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
     }
   }
 }

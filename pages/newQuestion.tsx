@@ -1,16 +1,19 @@
 import { faPen, faPlus, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SurveySheet } from "../interfaces";
+import { SheetQuestion } from "../components/ViewSheet";
 
-const SheetContext = React.createContext(([] as unknown) as [SurveySheet, React.Dispatch<React.SetStateAction<SurveySheet>>]);
+export const SheetContext = React.createContext(([] as unknown) as [SurveySheet, React.Dispatch<React.SetStateAction<SurveySheet>>]);
 export default function NewQuestion() {
   /** 설문 시트 초기형 오브젝트 클론 */
   const [sheet, setSheet] = useState({ ...initialSurveySheet });
   const [questionList, setQuestionList] = useState(sheet.questions as Question[]);
   const [sheetName, setSheetName] = useState(sheet.title);
-
+  const router = useRouter();
+  console.log(router);
   /** 새 질문 추가 */
   function addNewQuestion() {
     const newQuestion: Question = { title: "", questionType: "input", isEditing: true, answer: null };
@@ -27,13 +30,7 @@ export default function NewQuestion() {
       return;
     }
     console.log(sheet);
-    fetch("/api/questions/addNew", {
-      method: "post",
-      headers: {
-        dasd: "asd",
-      },
-      body: JSON.stringify(sheet),
-    }).then((res) => res.json());
+    // router.push("checkQuestion");
   }
 
   /** 설문지 내용 업데이트 */
@@ -174,66 +171,57 @@ function QuestionBlock({ question, index }: QuestionBlockProps) {
   useEffect(updateQuestion, [editingState, titleState, questionType, question]);
 
   useEffect(updateQuestion, [questionType, updateQuestion]);
-  return (
-    <div className={`single-question ${editingState ? "is-editing" : ""}`}>
-      {editingState ? (
-        <>
-          <div className="choose-question-type">
-            <span>質問のタイプを選択</span>
-            <div className="radios">
-              <input
-                name={`qeustion${index}`}
-                id={`qeustion${index}-type-1`}
-                onChange={(e) => {
-                  if (e.target.checked) setQuestionType("input");
-                }}
-                checked={questionType === "input"}
-                type="radio"
-              />
-              <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
-              <input
-                onChange={(e) => {
-                  if (e.target.checked) setQuestionType("radioSelect");
-                }}
-                checked={questionType === "radioSelect"}
-                name={`qeustion${index}`}
-                id={`qeustion${index}-type-2`}
-                type="radio"
-              />
-              <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
-            </div>
+  return editingState ? (
+    <div className={`single-question is-editing`}>
+      <div className="choose-question-type">
+        <span>質問のタイプを選択</span>
+        <div className="radios">
+          <input
+            name={`qeustion${index}`}
+            id={`qeustion${index}-type-1`}
+            onChange={(e) => {
+              if (e.target.checked) setQuestionType("input");
+            }}
+            checked={questionType === "input"}
+            type="radio"
+          />
+          <label htmlFor={`qeustion${index}-type-1`}>入力式</label>
+          <input
+            onChange={(e) => {
+              if (e.target.checked) setQuestionType("radioSelect");
+            }}
+            checked={questionType === "radioSelect"}
+            name={`qeustion${index}`}
+            id={`qeustion${index}-type-2`}
+            type="radio"
+          />
+          <label htmlFor={`qeustion${index}-type-2`}>選択式</label>
+        </div>
+      </div>
+      <div className="question-title-div">
+        {index + 1}.
+        <input ref={titleInput} placeholder="質問を入力" value={titleState} onInput={titleInputEvent} className="question-title-input title" />
+      </div>
+      <div className="set-answers">
+        {questionType === "input" && (
+          <div>
+            <input readOnly={true} value="이곳에 입력을 받습니다" />
           </div>
-
-          <div className="question-title-div">
-            {index + 1}.
-            <input ref={titleInput} placeholder="質問を入力" value={titleState} onInput={titleInputEvent} className="question-title-input title" />
-          </div>
-          <div className="set-answers">
-            {questionType === "input" && (
-              <div>
-                <input readOnly={true} value="이곳에 입력을 받습니다" />
-              </div>
-            )}
-            {questionType === "radioSelect" && <RadioSelectBuilder question={question} />}
-          </div>
-          <button className="confirm-button" onClick={submit}>
-            <FontAwesomeIcon icon={faSave} />
-            저장
-          </button>
-        </>
-      ) : (
-        <>
-          <span className="title">
-            {index + 1}. {question.title}
-          </span>
-          <div>{questionType === "input" ? <input readOnly={true} value="이곳에 입력을 받습니다" /> : <span>dada</span>}</div>
-          <button className="edit-button" onClick={editButtonEvent}>
-            <FontAwesomeIcon icon={faPen} />
-            수정
-          </button>
-        </>
-      )}
+        )}
+        {questionType === "radioSelect" && <RadioSelectBuilder question={question} />}
+      </div>
+      <button className="confirm-button" onClick={submit}>
+        <FontAwesomeIcon icon={faSave} />
+        저장
+      </button>
     </div>
+  ) : (
+    <SheetQuestion question={question} index={index}>
+      <button className="edit-button" onClick={editButtonEvent}>
+        <FontAwesomeIcon icon={faPen} />
+        수정
+      </button>
+    </SheetQuestion>
   );
 }
 
