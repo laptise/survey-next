@@ -36,3 +36,12 @@
     transform: translateY(0);
   }
 }
+
+@keyframes fromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

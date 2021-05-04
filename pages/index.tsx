@@ -1,62 +1,95 @@
 import { faCode, faPaperPlane, faPen, faTools } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GetServerSideProps, GetStaticProps } from "next";
 import Link from "next/link";
 import Layout from "../components/Layout";
+import scripts, { MainPageScript } from "../scripts/mainPage";
 
-const IndexPage = () => (
-  <Layout title="홈 | survey-next">
-    <h1 style={{ textAlign: "center" }}>Survey prototype</h1>
-    <small style={{ textAlign: "center", display: "block", margin: 20 }}>설문조사</small>
-    <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
-      <AddNewQuestionSection />
-      <HowToSection />
-      <DevSection />
-      <FeaturesSection />
-    </div>
-  </Layout>
-);
+const languages: any = {
+  ja: 0,
+  ko: 1,
+};
 
-const AddNewQuestionSection = () => (
+type IndexProps = {
+  scripts: MainPageScript;
+};
+
+const IndexPage = (props: IndexProps) => {
+  const { scripts } = props;
+  return (
+    <Layout title={`${scripts.pageTitle} | survey-next`}>
+      <h1 style={{ textAlign: "center" }}>Survey prototype</h1>
+      <small style={{ textAlign: "center", display: "block", margin: 20 }}>{scripts.titleDesc}</small>
+      <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
+        <AddNewQuestionSection {...props} />
+        <HowToSection {...props} />
+        <DevSection {...props} />
+        <FeaturesSection {...props} />
+      </div>
+    </Layout>
+  );
+};
+
+const AddNewQuestionSection = ({ scripts }: IndexProps) => (
   <div className="main-section">
     <FontAwesomeIcon className="section-icon" icon={faPaperPlane} />
-    <h2>간편한 작성과 배포</h2>
-    <p>필요한 설문 항목을 작성하면 링크가 생성됩니다. 링크를 배포하고 응답자들의 제출을 기다리기만 하면 됩니다.</p>
+    <h2>{scripts.addNewSectionTitle}</h2>
+    <p>{scripts.addNewSectionDesc}</p>
     <Link href="/newQuestion">
-      <button>새로운 질문 등록하기</button>
+      <button>{scripts.addNewSectionRegistButtonLabel}</button>
     </Link>
   </div>
 );
 
-const HowToSection = () => (
+const HowToSection = ({ scripts }: IndexProps) => (
   <div className="main-section">
     <FontAwesomeIcon className="section-icon" icon={faPen} />
-    <h2>직관적인 문제지 작성</h2>
-    <p>직관적이고 알기 쉬운 방법으로 설문을 작성할 수 있습니다.</p>
+    <h2>{scripts.howtoSectionTitle}</h2>
+    <p>{scripts.howtoSectionDesc}</p>
   </div>
 );
 
-const DevSection = () => (
+const DevSection = ({ scripts }: IndexProps) => (
   <div className="main-section">
     <FontAwesomeIcon className="section-icon" icon={faCode} />
-    <h2>테스트 설문</h2>
-    <p>
-      샘플 보기 <br />
-      GET REQUEST TEST
-    </p>
+    <h2>{scripts.devSectionTitle}</h2>
+    <p>{scripts.devSectionDesc}</p>
     <Link href="/survey/test">
-      <button>VIEW SAMPLE</button>
+      <button>{scripts.devSectionButtonLabel}</button>
     </Link>
   </div>
 );
 
-const FeaturesSection = () => (
+const FeaturesSection = ({ scripts }: IndexProps) => (
   <div className="main-section">
     <FontAwesomeIcon className="section-icon" icon={faTools} />
-    <h2>강력한 기능</h2>
-    <p>메일로 결과 제출받기, CSV출력, 1회성 링크 발행, 결과분석 등 유용한 기능을 지원합니다.</p>
+    <h2>{scripts.featuresSectionTitle}</h2>
+    <p>{scripts.featuresSectionDesc}</p>
     <Link href="/survey/test">
-      <button>더보기</button>
+      <button>{scripts.featuresSectionButtonLabel}</button>
     </Link>
   </div>
 );
+
+// export const getStaticProps: GetStaticProps = async ({ params, query }) => {
+//   console.log(params);
+//   return {
+//     props: {
+//       scripts: scripts[0],
+//     },
+//   };
+// };
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  let index = 1;
+  const lang = query.lang as string;
+  const setIndex = languages[lang];
+  if (setIndex != null) index = setIndex;
+  return {
+    props: {
+      scripts: scripts[index],
+    },
+  };
+};
+
 export default IndexPage;

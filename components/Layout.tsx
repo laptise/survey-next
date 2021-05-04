@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,26 +25,41 @@ const Layout = ({ children, title = "This is the default title", bodyClass }: Pr
   </div>
 );
 
-const Header = () => (
-  <header>
-    <nav>
-      <Link href="/">
-        <a>홈</a>
-      </Link>{" "}
-      |{" "}
-      <Link href="/newQuestion">
-        <a>새 질문 만들기</a>
-      </Link>{" "}
-      |{" "}
-      <Link href="/users">
-        <a>Users List</a>
-      </Link>{" "}
-      | <a href="/api/users">Users API</a>
-    </nav>
-    <button>
-      <FontAwesomeIcon icon={faGlobe} />
-    </button>
-  </header>
+const Header = () => {
+  const [langSetter, setLangSetter] = useState(false);
+  return (
+    <header>
+      <nav>
+        <Link href="/">
+          <a>홈</a>
+        </Link>{" "}
+        |{" "}
+        <Link href="/newQuestion">
+          <a>새 질문 만들기</a>
+        </Link>{" "}
+        |{" "}
+        <Link href="/users">
+          <a>Users List</a>
+        </Link>{" "}
+        | <a href="/api/users">Users API</a>
+      </nav>
+      <button>
+        <FontAwesomeIcon onClick={() => setLangSetter(true)} icon={faGlobe} />
+      </button>
+      {langSetter && <LocaleChanger setLangSetter={setLangSetter} />}
+    </header>
+  );
+};
+
+interface LocaleChangerProps {
+  setLangSetter: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const LocaleChanger = ({ setLangSetter }: LocaleChangerProps) => (
+  <div id="language-setter">
+    <span onClick={() => (window.location.href = "./?lang=ja")}>日本語</span>
+    <span onClick={() => (window.location.href = "./?lang=ko")}>한국어</span>
+  </div>
 );
 
 const Footer = () => (
