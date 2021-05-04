@@ -43,8 +43,8 @@ const Header = () => {
         </Link>{" "}
         | <a href="/api/users">Users API</a>
       </nav>
-      <button>
-        <FontAwesomeIcon onClick={() => setLangSetter(true)} icon={faGlobe} />
+      <button onClick={() => setLangSetter(true)}>
+        <FontAwesomeIcon icon={faGlobe} />
       </button>
       {langSetter && <LocaleChanger setLangSetter={setLangSetter} />}
     </header>
