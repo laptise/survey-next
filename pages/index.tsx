@@ -1,6 +1,6 @@
 import { faCode, faPaperPlane, faPen, faTools } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { GetServerSideProps, GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import scripts, { MainPageScript } from "../scripts/mainPage";

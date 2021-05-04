@@ -55,7 +55,7 @@ interface LocaleChangerProps {
   setLangSetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LocaleChanger = ({ setLangSetter }: LocaleChangerProps) => (
+const LocaleChanger = ({}: LocaleChangerProps) => (
   <div id="language-setter">
     <span onClick={() => (window.location.href = "./?lang=ja")}>日本語</span>
     <span onClick={() => (window.location.href = "./?lang=ko")}>한국어</span>
