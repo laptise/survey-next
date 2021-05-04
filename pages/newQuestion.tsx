@@ -42,7 +42,7 @@ export default function NewQuestion() {
     setSheetName(e.currentTarget.value);
   }
 
-  const submitButtonValidity = questionList?.length > 0;
+  const submitButtonValidity = sheetName && questionList?.length > 0;
 
   useEffect(updateSheet, [questionList, sheetName]);
 
@@ -100,7 +100,7 @@ function ConfigSection() {
             </span>
 
             <div className="selection">
-              <label className="single-option" data-checked={`${manualOptionValue === false ? "true" : ""}`}>
+              <label className="single-option" data-checked={manualOptionValue === false}>
                 <input
                   type="radio"
                   onChange={() => setManualOptionValue(false)}

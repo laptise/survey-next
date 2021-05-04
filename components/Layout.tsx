@@ -7,9 +7,10 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 type Props = {
   children?: ReactNode;
   title?: string;
+  bodyClass?: string;
 };
 
-const Layout = ({ children, title = "This is the default title" }: Props) => (
+const Layout = ({ children, title = "This is the default title", bodyClass }: Props) => (
   <div id="app">
     <Head>
       <title>{title}</title>
@@ -17,7 +18,9 @@ const Layout = ({ children, title = "This is the default title" }: Props) => (
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <Header />
-    <div id="app-body">{children}</div>
+    <div id="app-body" className={`${bodyClass || ""}`}>
+      {children}
+    </div>
     <Footer />
   </div>
 );
