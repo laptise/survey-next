@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
-import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SurveySheet } from "../interfaces";
+import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SheetConfig, SurveySheet } from "../interfaces";
 import { SheetQuestion } from "../components/ViewSheet";
 
 export const SheetContext = React.createContext(([] as unknown) as [SurveySheet, React.Dispatch<React.SetStateAction<SurveySheet>>]);
@@ -75,7 +75,10 @@ function ConfigSection() {
   const [open, setOpen] = useState(false);
   const [manualOptionValue, setManualOptionValue] = useState(sheet.config.manualOptionValue);
   const updateConfigs = () => {
-    const config = { manualOptionValue: manualOptionValue };
+    const validationFrom = new Date();
+    const validationTo = new Date();
+    validationTo.setDate(validationTo.getDate() + 7);
+    const config: SheetConfig = { manualOptionValue: manualOptionValue, validationFrom, validationTo };
     setSheet({ ...sheet, ...{ config } });
     sheet.config.manualOptionValue = manualOptionValue;
     /** 만약 값 자동생성옵션으로 생성된 옵션이라면 value가 비어있기 때문에 자동으로 대입 */
