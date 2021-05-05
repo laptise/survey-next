@@ -10,6 +10,9 @@ export default function Survey({ sheet }: SheetProps) {
     <>
       <div className="question-header">
         <h1>{sheet.title}</h1>
+        <span>
+          응답 기간 {sheet.config.validationFrom.toString()}~{sheet.config.validationTo.toString()}
+        </span>
         {sheet.createdAt && <small>{sheet.createdAt.toLocaleString()}</small>}
       </div>
       {sheet.questions?.map((question, index) => (

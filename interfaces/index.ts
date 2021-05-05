@@ -38,6 +38,8 @@ export class RadioSelect extends Select {
 
 export type SheetConfig = {
   manualOptionValue: boolean;
+  validationFrom: Date;
+  validationTo: Date;
 };
 
 export type SurveySheet = {
@@ -55,6 +57,8 @@ export const initialSurveySheet: SurveySheet = {
   questions: [],
   config: {
     manualOptionValue: false,
+    validationFrom: new Date(),
+    validationTo: new Date(new Date().setMonth(new Date().getMonth() + 1)),
   },
 };
 

@@ -12,7 +12,7 @@ export const existingIds = ["dfjj3l290ajs"];
 
 export const surveySheets: SurveySheet[] = [
   {
-    config: { manualOptionValue: false },
+    config: { manualOptionValue: false, validationFrom: new Date(2021, 4, 3), validationTo: new Date(2022, 4, 3) },
     id: "test",
     createdAt: new Date(2021, 3, 30, 18, 45),
     title: "아침 식사",
