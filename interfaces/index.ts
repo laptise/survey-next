@@ -36,10 +36,18 @@ export class RadioSelect extends Select {
   }
 }
 
+/** 설문지 설정 */
 export type SheetConfig = {
+  /** 선택지 옵션 수동설정 */
   manualOptionValue: boolean;
+  /** 유효기간개시 */
   validationFrom: Date;
+  /** 유효기간종료 */
   validationTo: Date;
+  /** 만료후 공개설정 */
+  expiredView?: boolean;
+  /** 공개링크 발행 */
+  openUrl?: boolean;
 };
 
 export type SurveySheet = {

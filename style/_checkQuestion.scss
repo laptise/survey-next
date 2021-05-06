@@ -5,4 +5,15 @@
       flex: 1;
     }
   }
+  #check-config {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3 {
+      margin: 5px;
+    }
+    input[type="date"] {
+      margin-top: 10px;
+    }
+  }
 }

@@ -7,6 +7,15 @@ const CheckQuestion = () => {
   const [sheet, setSheet] = useState((null as unknown) as SurveySheet);
   const [expiredView, setExpiredView] = useState(false);
   const [limitedLink, setLimitedLink] = useState(false);
+  const [expireYMD, setExpireYMD] = useState("");
+  const [expYear, expMonth, expDate] = expireYMD.split("-").map((str) => Number(str));
+  const expireDate = new Date(expYear, expMonth - 1, expDate);
+
+  const expiresDateInputEvent = (e: React.FormEvent<HTMLInputElement>) => {
+    setExpireYMD(e.currentTarget.value);
+    console.log(expireDate);
+  };
+
   useEffect(() => {
     const storedSheet = localStorage?.getItem("tmpSheet");
     const sheet: SurveySheet = storedSheet && JSON.parse(storedSheet);
@@ -22,10 +31,13 @@ const CheckQuestion = () => {
       <>
         <Layout title={`등록전 확인 | Survey-next`} bodyClass={"check-question"}>
           <Survey sheet={sheet} />
-          <h3>개요</h3>
-          <span>총 문항 수 :{sheet.questions.length}개</span>
-          <h3>제출 기한</h3>
-          <small>해당기한이 지날경우 질문 제출이 불가능해집니다.</small>
+          <div id="check-config">
+            <h3>개요</h3>
+            <span>총 문항 수 :{sheet.questions.length}개</span>
+            <h3>제출 기한</h3>
+            <small>해당기한이 지날경우 질문 제출이 불가능해집니다.</small>
+            <input type="date" onInput={expiresDateInputEvent} />
+          </div>
           <div className="config-item">
             <span className="title">기한만료 후 공개설정</span>
             <span className="description">제출기한이 지난 후 질문을 비공개 할지 선택합니다.</span>
