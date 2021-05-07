@@ -8,7 +8,7 @@ import scripts, { MainPageScript } from "../scripts/mainPage";
 const languages: any = {
   ja: 0,
   ko: 1,
-};
+}; 
 
 type IndexProps = {
   scripts: MainPageScript;
