@@ -1,7 +1,14 @@
-# Survey-next
+# Demo
 
 [샘플(on Vercel)](https://survey-next-five.vercel.app/)
 인프라 구축전까지 이용예정
+
+# 서버
+
+- aws linux 2
+- nginx
+
+http://3.112.186.197/
 
 ## 개요
 
