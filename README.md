@@ -7,6 +7,8 @@
 
 - aws linux 2
 - nginx
+- node.js
+- pm2
 
 http://3.112.186.197/
 
