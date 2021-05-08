@@ -8,7 +8,7 @@ import scripts, { MainPageScript } from "../scripts/mainPage";
 const languages: any = {
   ja: 0,
   ko: 1,
-};
+}; 
 
 type IndexProps = {
   scripts: MainPageScript;
@@ -18,7 +18,7 @@ const IndexPage = (props: IndexProps) => {
   const { scripts } = props;
   return (
     <Layout title={`${scripts.pageTitle} | survey-next`}>
-      <h1 style={{ textAlign: "center" }}>Survey prototype</h1>
+      <h1 style={{ textAlign: "center" }}>Survey prototype!</h1>
       <small style={{ textAlign: "center", display: "block", margin: 20 }}>{scripts.titleDesc}</small>
       <div style={{ flexDirection: "row", display: "flex", flexWrap: "wrap" }}>
         <AddNewQuestionSection {...props} />
