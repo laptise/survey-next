@@ -8,14 +8,17 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
+    "fs": "^0.0.1-security",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "^1.32.12",
     "scss": "^0.2.4",
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14"
+    "serverless-mysql": "^1.5.4",
+    "tls": "^0.0.1"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
