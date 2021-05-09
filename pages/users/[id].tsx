@@ -2,6 +2,7 @@ import { GetServerSideProps } from "next";
 import { User } from "../../interfaces";
 import Layout from "../../components/Layout";
 import ListDetail from "../../components/ListDetail";
+import excuteQuery from "../../db";
 
 type Props = {
   item?: User;
@@ -29,8 +30,11 @@ export default StaticPropsDetail;
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const id = params?.id;
-    const [item] = await fetch(`http://localhost:3000/api/users/getUser?id=${id}`).then((res) => res.json());
-    return { props: { item } };
+    const [item] = await excuteQuery({
+      query: "SELECT * FROM users WHERE id = ?",
+      values: id,
+    });
+    return { props: { item: JSON.parse(JSON.stringify(item)) } };
   } catch (err) {
     return { props: { errors: err.message } };
   }

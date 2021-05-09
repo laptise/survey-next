@@ -3,6 +3,7 @@ import Link from "next/link";
 import { User } from "../../interfaces";
 import Layout from "../../components/Layout";
 import List from "../../components/List";
+import excuteQuery from "../../db";
 
 type Props = {
   items: User[];
@@ -29,8 +30,11 @@ export default WithStaticProps;
 // すべてのリクエストの度に実行される
 export const getServerSideProps: GetServerSideProps = async () => {
   try {
-    const items = await fetch(`http://localhost:3000/api/users`).then((res) => res.json());
-    return { props: { items } };
+    const items = await excuteQuery({
+      query: "SELECT * FROM users",
+      values: null,
+    });
+    return { props: { items: JSON.parse(JSON.stringify(items)) } };
   } catch (err) {
     return { props: { errors: err.message } };
   }
