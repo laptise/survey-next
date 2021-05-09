@@ -4,9 +4,10 @@ import excuteQuery from "../../db";
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     const result = await excuteQuery({
-      query: "INSERT INTO users (id, createdAt, email, hash, salt) VALUES(?, ?, ?, ?, ?)",
-      values: [1, 2, 3, 4, 5],
+      query: "INSERT INTO test (text) VALUES(?)",
+      values: [new Date().valueOf()],
     });
+    res.status(200).send("DADA");
     console.log(result);
   } catch (error) {
     console.log(error);

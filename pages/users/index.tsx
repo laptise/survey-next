@@ -2,9 +2,9 @@ import { GetStaticProps } from "next";
 import Link from "next/link";
 
 import { User } from "../../interfaces";
-import { sampleUserData } from "../../utils/sample-data";
 import Layout from "../../components/Layout";
 import List from "../../components/List";
+import excuteQuery from "../../db";
 
 type Props = {
   items: User[];
@@ -27,11 +27,15 @@ const WithStaticProps = ({ items }: Props) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
+  const res = await excuteQuery({
+    query: "SELECT * FROM users",
+    values: null,
+  }).then((res) => JSON.parse(JSON.stringify(res)));
+  console.log(res);
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
-  const items: User[] = sampleUserData;
-  return { props: { items } };
+  return { props: { items: res } };
 };
 
 export default WithStaticProps;
