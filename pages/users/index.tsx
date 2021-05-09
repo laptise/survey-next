@@ -1,10 +1,8 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
-
 import { User } from "../../interfaces";
 import Layout from "../../components/Layout";
 import List from "../../components/List";
-import excuteQuery from "../../db";
 
 type Props = {
   items: User[];
@@ -14,7 +12,7 @@ const WithStaticProps = ({ items }: Props) => (
   <Layout title="Users List | Next.js + TypeScript Example">
     <h1>Survey List</h1>
     <p>
-      Example fetching data from inside <code>getStaticProps()</code>.
+      Example fetching data from inside <code>getServerSideProps()</code>.
     </p>
     <p>You are currently on: /users</p>
     <List items={items} />
@@ -26,16 +24,14 @@ const WithStaticProps = ({ items }: Props) => (
   </Layout>
 );
 
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await excuteQuery({
-    query: "SELECT * FROM users",
-    values: null,
-  }).then((res) => JSON.parse(JSON.stringify(res)));
-  console.log(res);
-  // Example for including static props in a Next.js function component page.
-  // Don't forget to include the respective types for any props passed into
-  // the component.
-  return { props: { items: res } };
-};
-
 export default WithStaticProps;
+
+// すべてのリクエストの度に実行される
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const items = await fetch(`http://localhost:3000/api/users`).then((res) => res.json());
+    return { props: { items } };
+  } catch (err) {
+    return { props: { errors: err.message } };
+  }
+};
