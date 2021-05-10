@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 
 type Props = {
   children?: ReactNode;
@@ -55,12 +56,21 @@ interface LocaleChangerProps {
   setLangSetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LocaleChanger = ({}: LocaleChangerProps) => (
-  <div id="language-setter">
-    <span onClick={() => (window.location.href = "./?lang=ja")}>日本語</span>
-    <span onClick={() => (window.location.href = "./?lang=ko")}>한국어</span>
-  </div>
-);
+const LocaleChanger = ({}: LocaleChangerProps) => {
+  const router = useRouter();
+  const toJapanese = () => {
+    router.push(router.route, router.route, { locale: "ja" });
+  };
+  const toKorean = () => {
+    router.push(router.route, router.route, { locale: "ko" });
+  };
+  return (
+    <div id="language-setter">
+      <span onClick={toJapanese}>日本語</span>
+      <span onClick={toKorean}>한국어</span>
+    </div>
+  );
+};
 
 const Footer = () => (
   <footer>

@@ -34,6 +34,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
       query: "SELECT * FROM users",
       values: null,
     });
+    console.log(items);
     return { props: { items: JSON.parse(JSON.stringify(items)) } };
   } catch (err) {
     return { props: { errors: err.message } };

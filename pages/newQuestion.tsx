@@ -3,7 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
-import { initialSurveySheet, Question, QuestionBlockProps, QuestionType, RadioOption, RadioSelect, SheetConfig, SurveySheet } from "../interfaces";
+import {
+  initialQuestion,
+  initialSurveySheet,
+  Question,
+  QuestionBlockProps,
+  QuestionType,
+  RadioOption,
+  RadioSelect,
+  SheetConfig,
+  SurveySheet,
+} from "../interfaces";
 import { SheetQuestion } from "../components/ViewSheet";
 
 export const SheetContext = React.createContext(([] as unknown) as [SurveySheet, React.Dispatch<React.SetStateAction<SurveySheet>>]);
@@ -15,7 +25,7 @@ export default function NewQuestion() {
   const router = useRouter();
   /** 새 질문 추가 */
   function addNewQuestion() {
-    const newQuestion: Question = { title: "", questionType: "input", isEditing: true, answer: null };
+    const newQuestion: Question = { ...initialQuestion };
     setQuestionList([...questionList, newQuestion]);
     setSheet({ ...sheet, ...{ questions: questionList } });
   }

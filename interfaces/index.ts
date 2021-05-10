@@ -1,7 +1,6 @@
 /** 옵션 클래스 */
 export class Option {
   label: string;
-
   value: string;
   constructor(label: string, value: string) {
     this.label = label;
@@ -76,12 +75,16 @@ export type Answer = null | RadioSelect;
 export type Question = {
   title: string;
 
+  description: string;
+
   isEditing: boolean;
 
   questionType: QuestionType;
 
   answer: null | RadioSelect;
 };
+
+export const initialQuestion: Question = { title: "", questionType: "input", isEditing: true, answer: null, description: "" };
 
 /** 질문 블록 프로퍼티 */
 export interface QuestionBlockProps {

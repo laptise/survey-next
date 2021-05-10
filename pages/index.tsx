@@ -8,7 +8,7 @@ import scripts, { MainPageScript } from "../scripts/mainPage";
 const languages: any = {
   ja: 0,
   ko: 1,
-}; 
+};
 
 type IndexProps = {
   scripts: MainPageScript;
@@ -80,11 +80,9 @@ const FeaturesSection = ({ scripts }: IndexProps) => (
 //   };
 // };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  let index = 1;
-  const lang = query.lang as string;
-  const setIndex = languages[lang];
-  if (setIndex != null) index = setIndex;
+export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+  let index = 0;
+  if (locale) index = languages[locale as string];
   return {
     props: {
       scripts: scripts[index],
