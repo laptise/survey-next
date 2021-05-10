@@ -19,6 +19,7 @@ export const surveySheets: SurveySheet[] = [
     questions: [
       {
         title: "오늘 아침식사를 했나요?",
+        description: "",
         questionType: "radioSelect",
         isEditing: false,
         answer: {
@@ -28,9 +29,10 @@ export const surveySheets: SurveySheet[] = [
           ],
         },
       },
-      { title: "먹었다면 뭐 먹었나요?", questionType: "input", isEditing: false, answer: null },
+      { title: "먹었다면 뭐 먹었나요?", description: "", questionType: "input", isEditing: false, answer: null },
       {
         title: "어땠나요?",
+        description: "",
         questionType: "radioSelect",
         isEditing: false,
         answer: {
