@@ -1,7 +1,8 @@
 # Demo
 
-[샘플(on Vercel)](https://survey-next-five.vercel.app/)
-인프라 구축전까지 이용예정
+[개발 서버](http://3.112.186.197/)
+
+[Vercel 데모 (개발 서버 반영전)](https://survey-next-five.vercel.app/)
 
 # 서버
 
@@ -10,8 +11,6 @@
 - node.js
 - pm2
 - MySql
-
-http://3.112.186.197/
 
 ## DB
 
