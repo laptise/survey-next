@@ -70,13 +70,15 @@ interface LocaleChangerProps {
   setLangSetter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const LocaleChanger = ({}: LocaleChangerProps) => {
+const LocaleChanger = ({ setLangSetter }: LocaleChangerProps) => {
   const router = useRouter();
   const toJapanese = () => {
     router.push(router.route, router.route, { locale: "ja" });
+    setLangSetter(false);
   };
   const toKorean = () => {
     router.push(router.route, router.route, { locale: "ko" });
+    setLangSetter(false);
   };
   return (
     <div id="language-setter">
