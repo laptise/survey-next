@@ -4,39 +4,53 @@ import Head from "next/head";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
+import scripts, { MenuScrtipt } from "../scripts/menu";
+
+const languages: any = {
+  ja: 0,
+  ko: 1,
+};
 
 type Props = {
   children?: ReactNode;
   title?: string;
   bodyClass?: string;
+  script?: MenuScrtipt;
 };
 
-const Layout = ({ children, title = "This is the default title", bodyClass }: Props) => (
-  <div id="app">
-    <Head>
-      <title>{title}</title>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-    </Head>
-    <Header />
-    <div id="app-body" className={`${bodyClass || ""}`}>
-      {children}
+const Layout = ({ children, title = "This is the default title", bodyClass }: Props) => {
+  const router = useRouter();
+  const locale = router.locale as string;
+  let index = 0;
+  if (locale) index = languages[locale as string];
+  const script = scripts[index];
+  return (
+    <div id="app">
+      <Head>
+        <title>{title}</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <Header script={script} />
+      <div id="app-body" className={`${bodyClass || ""}`}>
+        {children}
+      </div>
+      <Footer />
     </div>
-    <Footer />
-  </div>
-);
+  );
+};
 
-const Header = () => {
+const Header = ({ script }: Props) => {
   const [langSetter, setLangSetter] = useState(false);
   return (
     <header>
       <nav>
         <Link href="/">
-          <a>홈</a>
+          <a>{script?.home}</a>
         </Link>{" "}
         |{" "}
         <Link href="/newQuestion">
-          <a>새 질문 만들기</a>
+          <a>{script?.makeNewQuestion}</a>
         </Link>{" "}
         |{" "}
         <Link href="/users">
@@ -77,5 +91,20 @@ const Footer = () => (
     <span>survey prototype All Rights are Reserved</span>
   </footer>
 );
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   // Get the paths we want to pre-render based on users
+//   const paths = scrtips.map((sheet) => ({
+//     params: { id: sheet.id },
+//   }));
+
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: false };
+// };
+
+// This function gets called at build time on server-side.
+// It won't be called on client-side, so you can even do
+// direct database queries.
 
 export default Layout;
