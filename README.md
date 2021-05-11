@@ -2,7 +2,7 @@
 
 [개발 서버](http://3.112.186.197/)
 
-[Vercel 데모 (개발 서버 반영전)](https://survey-next-five.vercel.app/)
+[Vercel 데모 (개발 서버 반영전, 속도 느림)](https://survey-next-five.vercel.app/)
 
 # 서버
 
