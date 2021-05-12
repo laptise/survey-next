@@ -27,7 +27,7 @@
 - React Hooks
 - Typescript
 - Scss (Sass)
-- MySql (예정)
+- MySql
 - EsLint (예정)
 - etc..
 
